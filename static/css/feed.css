@@ -190,3 +190,28 @@ header {
 #header-profile:hover .dropdown-menu{
     display:block;
 }
+
+#make-post-button {
+    width: 800px;
+    display: flex;
+    align-items:flex-start;
+    margin: auto;
+    background-color: white;
+    padding:10px;
+    border: 1px solid lightgray;
+    border-radius: 12px;
+    gap:50px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#make-post-button a{
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+#make-post-button a:hover{
+    color: #4DD091;
+}

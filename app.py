@@ -91,5 +91,32 @@ def postPage(post_id):
     user = postsCollection.find_one({"_id":ObjectId(post_id)})['user']
     return render_template("postPage.html", title = title, postContent = content, comments = data, user = user)
 
+@app.route('/make-post', methods=['GET'])
+def makePostPage():
+       if 'username' in session:
+           return render_template('makePost.html')
+       else:
+           return redirect(url_for('loginPage'))
+
+@app.route('/make-post', methods=['POST'])
+def makePost():
+    title = request.form.get('title')
+    content = request.form.get('content')
+    user_id = session['userId']
+
+    #prep post for insertion into database
+    new_post = {
+        'title': title,
+        'content': content,
+        'user_id': user_id,
+        'comments': []
+    }
+
+    post_id = postsCollection.insert_one(new_post).inserted_id
+
+    flash("Post created successfully!")
+    return redirect(url_for('postPage', post_id = str(post_id)))
+
+
 if __name__ == "__main__":
     app.run(debug=True)
